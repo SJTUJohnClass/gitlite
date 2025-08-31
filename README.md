@@ -55,7 +55,7 @@ gitlite/
 > 
 > 5.请仔细地阅读`Utils.h`与`Utils.cpp`中每一个函数，根据注释明确其用途，避免在操作系统层面的重复实现.
 > 
-> 6.序列化时如果涉及`std::unordered_map`请仔细考虑！`std::unordered_map`中元素顺序的不确定性会导致其在序列化时会出现问题，如果懒得解决的话建议采用 `std::map`。
+> 6.序列化时如果涉及`std::unordered_map`请仔细考虑！由于`std::unordered_map`的底层实现导致其在序列化时会出现问题，如果懒得解决的话建议采用 `std::map`。
     
 愿您一切顺利！如果遇到其他问题，我们将会统一收集并公开发布！
     
@@ -667,6 +667,7 @@ All tests passed!
 感谢2024级蒋欣桐在完成这个项目后提供的反馈以及为README做出的几十条修改，以及2024级ACM 丁宣铭为README提出的宝贵的修改意见。
 
 如有问题请联系本项目的发布者`PhantomPhoenix`, 他的邮箱地址是: `logic_1729@sjtu.edu.cn`
+
 
 
 
