@@ -698,10 +698,11 @@ Style 部分，我们会根据你的`README.md`以及代码布局与风格进行
 
 ## Acknowledgement
 
-特别感谢 `CS61B` 对这个项目的启发，`UCBerkely` 提供了极好的 `skeleton` .
+特别感谢 `CS61B` 对这个项目的启发，UC Berkeley 提供了极好的 skeleton.
 
-感谢 `UCBerkely` 为原始项目提供的极好的文档以及无数完成这个项目的网友为这个项目撰写的踩坑报告。
+感谢 UC Berkeley 为原始项目提供的极好的文档以及无数完成这个项目的网友为这个项目撰写的踩坑报告。
 
 感谢2024级蒋欣桐在完成这个项目后提供的反馈以及为README做出的几十条修改，以及2024级ACM 丁宣铭, 2025级段则谦为README提出的宝贵的修改意见。
 
 如有问题请联系本项目的发布者`PhantomPhoenix`, 他的邮箱地址是: `logic_1729@sjtu.edu.cn`
+
