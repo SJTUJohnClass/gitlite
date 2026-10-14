@@ -1,0 +1,14 @@
+# Goal: history command operand validation after Subtask 2 works.
+I prelude1.inc
+> log extra
+Incorrect operands.
+<<<
+> global-log extra
+Incorrect operands.
+<<<
+> tag bad/name
+Incorrect operands.
+<<<
+> tag valid too many operands
+Incorrect operands.
+<<<

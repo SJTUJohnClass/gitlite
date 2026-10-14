@@ -1,0 +1,28 @@
+# Goal: status lists many newly created branches in lexicographic order.
+> init
+<<<
+> branch zeta
+<<<
+> branch alpha
+<<<
+> branch topic
+<<<
+> branch beta
+<<<
+> status
+=== Branches ===
+alpha
+beta
+*master
+topic
+zeta
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<

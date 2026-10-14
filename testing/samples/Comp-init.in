@@ -1,0 +1,46 @@
+# Comp-init test: checks status/log observations that belong to later features.
+> init
+<<<
+E .gitlite
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<
+D DATE "Date: \w{3} \w{3} \d{2} \d{2}:\d{2}:\d{2} 1970 [-+]\d{4}"
+> log
+===
+commit ([a-f0-9]{40})
+${DATE}
+initial commit
+
+<<<*
+D INITIAL_ID "${1}"
+> init
+A Gitlite version-control system already exists in the current directory.
+<<<
+> log
+===
+commit ${INITIAL_ID}
+${DATE}
+initial commit
+
+<<<*
+C SECOND
+> init
+<<<
+> log
+===
+commit ${INITIAL_ID}
+${DATE}
+initial commit
+
+<<<*

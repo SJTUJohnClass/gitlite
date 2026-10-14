@@ -1,0 +1,9 @@
+# Goal: merge operand validation after basic merge behavior works.
+I prelude1.inc
+> merge
+Incorrect operands.
+<<<
+> merge one two
+Incorrect operands.
+<<<
+I blank-status.inc

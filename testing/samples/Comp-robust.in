@@ -1,0 +1,31 @@
+# Comp-robust test: rejected commands leave status unchanged.
+> glorp foo
+No command with that name exists.
+<<<
+> add
+Not in an initialized Gitlite directory.
+<<<
+> init extra
+Incorrect operands.
+<<<
+> init
+<<<
+> add
+Incorrect operands.
+<<<
+> commit
+Incorrect operands.
+<<<
+> rm
+Incorrect operands.
+<<<
+> log extra
+Incorrect operands.
+<<<
+> global-log extra
+Incorrect operands.
+<<<
+> checkout a b c d
+Incorrect operands.
+<<<
+I blank-status.inc

@@ -1,0 +1,30 @@
+# Goal: global command dispatch, initialization precedence, and operand validation.
+> glorp foo
+No command with that name exists.
+<<<
+> add
+Not in an initialized Gitlite directory.
+<<<
+> init extra
+Incorrect operands.
+<<<
+> init
+<<<
+> add
+Incorrect operands.
+<<<
+> commit
+Incorrect operands.
+<<<
+> rm
+Incorrect operands.
+<<<
+C nested
++ file.txt wug.txt
+C
+> add nested/file.txt
+Incorrect operands.
+<<<
+> rm nested/file.txt
+Incorrect operands.
+<<<

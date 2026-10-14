@@ -1,0 +1,43 @@
+# Comp-commit-01 test: rejected commits preserve staging and history.
+I prelude1.inc
+> log
+===
+${COMMIT_HEAD}
+initial commit
+
+<<<*
+D INITIAL_HEAD "${1}"
+> commit ""
+Please enter a commit message.
+<<<
+> commit "Nothing here"
+No changes added to the commit.
+<<<
++ f.txt wug.txt
+> add f.txt
+<<<
+> commit ""
+Please enter a commit message.
+<<<
+= f.txt wug.txt
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+f.txt
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<
+> log
+===
+commit ${INITIAL_HEAD}
+${DATE}
+initial commit
+
+<<<*

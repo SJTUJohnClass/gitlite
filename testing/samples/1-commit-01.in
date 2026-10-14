@@ -1,0 +1,20 @@
+# Goal: commit validation, including empty-message error precedence.
+I prelude1.inc
+> commit ""
+Please enter a commit message.
+<<<
+> commit "Nothing here"
+No changes added to the commit.
+<<<
++ f.txt wug.txt
+> add f.txt
+<<<
+> commit ""
+Please enter a commit message.
+<<<
+= f.txt wug.txt
+> commit "track f after rejected empty message"
+<<<
+> commit "Nothing here"
+No changes added to the commit.
+<<<

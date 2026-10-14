@@ -1,0 +1,120 @@
+# Goal: identical changes on both branches still produce a merge commit.
+I setup2.inc
+> branch other
+<<<
++ f.txt notwug.txt
+> add f.txt
+<<<
+> commit "Change f on master"
+<<<
+> checkout other
+<<<
++ f.txt notwug.txt
+> add f.txt
+<<<
+> commit "Same change on other"
+<<<
+> checkout master
+<<<
+> merge other
+<<<
+= f.txt notwug.txt
+= g.txt notwug.txt
+> log
+===
+${COMMIT_HEAD}
+Merged other into master\.
+
+${ARBLINES}
+<<<*
+I blank-status2.inc
+> merge other
+Given branch is an ancestor of the current branch.
+<<<
+
+# Rule 3: if both branches deleted a tracked path, a recreated work file is
+# preserved as untracked during the normal merge.
+C BOTH-DELETED
+> init
+<<<
++ x.txt wug.txt
+> add x.txt
+<<<
+> commit "track x"
+<<<
+> branch given
+<<<
+> rm x.txt
+<<<
++ master.txt notwug.txt
+> add master.txt
+<<<
+> commit "master deletes x"
+<<<
+> checkout given
+<<<
+> rm x.txt
+<<<
++ given.txt wug2.txt
+> add given.txt
+<<<
+> commit "given deletes x"
+<<<
+> checkout master
+<<<
++ x.txt wug3.txt
+> merge given
+<<<
+= x.txt wug3.txt
+> status
+=== Branches ===
+given
+*master
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+x.txt
+
+<<<
+
+# An ancestor merge performs no worktree check or write, even when an
+# untracked file has the same path as one tracked by that ancestor.
+C ANCESTOR
+> init
+<<<
++ x.txt wug.txt
+> add x.txt
+<<<
+> commit "track x"
+<<<
+> branch old
+<<<
+> rm x.txt
+<<<
+> commit "remove x"
+<<<
++ x.txt wug2.txt
+> merge old
+Given branch is an ancestor of the current branch.
+<<<
+= x.txt wug2.txt
+> status
+=== Branches ===
+*master
+old
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+x.txt
+
+<<<

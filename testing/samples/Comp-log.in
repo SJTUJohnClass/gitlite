@@ -1,0 +1,80 @@
+# Check merge-specific log formatting and strict first-parent traversal.
+I prelude1.inc
++ base.txt wug.txt
+> add base.txt
+<<<
+> commit "base"
+<<<
+> log
+===
+${COMMIT_HEAD}
+base
+
+===
+${COMMIT_HEAD}
+initial commit
+
+<<<*
+D BASE "${1}"
+D INITIAL "${2}"
+> branch side
+<<<
++ main.txt notwug.txt
+> add main.txt
+<<<
+> commit "main only"
+<<<
+> log
+===
+commit (([a-f0-9]{7})[a-f0-9]{33})
+${DATE}
+main only
+
+${ARBLINES}
+<<<*
+D MAIN "${1}"
+D MAIN_ABBR "${2}"
+> checkout side
+<<<
++ side.txt wug2.txt
+> add side.txt
+<<<
+> commit "side only"
+<<<
+> log
+===
+commit (([a-f0-9]{7})[a-f0-9]{33})
+${DATE}
+side only
+
+${ARBLINES}
+<<<*
+D SIDE "${1}"
+D SIDE_ABBR "${2}"
+> checkout master
+<<<
+> merge side
+<<<
+> log
+===
+commit [a-f0-9]{40}
+Merge: ${MAIN_ABBR} ${SIDE_ABBR}
+${DATE}
+Merged side into master\.
+
+===
+commit ${MAIN}
+${DATE}
+main only
+
+===
+commit ${BASE}
+${DATE}
+base
+
+===
+commit ${INITIAL}
+${DATE}
+initial commit
+
+<<<*

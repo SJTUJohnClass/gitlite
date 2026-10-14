@@ -1,0 +1,74 @@
+# Test special cases of merge.
+I setup2.inc
+> branch b1
+<<<
++ h.txt wug2.txt
+> add h.txt
+<<<
+> commit "Add h.txt"
+<<<
+> branch b2
+<<<
+> rm f.txt
+<<<
+> commit "remove f.txt"
+<<<
+> merge b1
+Given branch is an ancestor of the current branch.
+<<<
+> checkout b2
+<<<
+= f.txt wug.txt
+> merge master
+Current branch fast-forwarded.
+<<<
+* f.txt
+> branch same
+<<<
++ x.txt wug.txt
+> add x.txt
+<<<
+> commit "temporarily add x"
+<<<
+> rm x.txt
+<<<
+> commit "remove x"
+<<<
+> checkout same
+<<<
++ y.txt notwug.txt
+> add y.txt
+<<<
+> commit "temporarily add y"
+<<<
+> rm y.txt
+<<<
+> commit "remove y"
+<<<
+> checkout b2
+<<<
+> merge same
+<<<
+> log
+===
+${COMMIT_HEAD}
+Merged same into b2\.
+
+${ARBLINES}
+<<<*
+> status
+=== Branches ===
+b1
+*b2
+master
+same
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<

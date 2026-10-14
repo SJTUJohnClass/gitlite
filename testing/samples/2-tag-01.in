@@ -1,0 +1,33 @@
+# Subtask2: create and list tags without relying on later commands.
+I prelude1.inc
+> tag
+<<<
++ f.txt wug.txt
+> add f.txt
+<<<
+> commit "first"
+<<<
+> log
+===
+commit ([a-f0-9]{40})
+${DATE}
+first
+
+===
+commit [a-f0-9]{40}
+${DATE}
+initial commit
+
+<<<*
+D FIRST "${1}"
+> tag release
+<<<
+> tag alpha
+<<<
+> tag
+alpha ${FIRST}
+release ${FIRST}
+<<<
+> tag release
+A tag with that name already exists.
+<<<

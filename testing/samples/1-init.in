@@ -1,0 +1,12 @@
+# Goal: initialization layout and repeat-init safety.
+> init
+<<<
+E .gitlite
+> init
+A Gitlite version-control system already exists in the current directory.
+<<<
+E .gitlite
+C SECOND
+> init
+<<<
+E .gitlite

@@ -1,0 +1,106 @@
+# Check the exact reachable set, uniqueness, chronological ordering, and the
+# commit-id tie-breaker used by global-log.
+I prelude1.inc
+
+# Create several commits rapidly. Commit timestamps have one-second precision,
+# so this also exercises id ordering among commits made in the same second.
++ marker.txt version-00.txt
+> add marker.txt
+<<<
+> commit "tie 00"
+<<<
++ marker.txt version-01.txt
+> add marker.txt
+<<<
+> commit "tie 01"
+<<<
++ marker.txt version-02.txt
+> add marker.txt
+<<<
+> commit "tie 02"
+<<<
++ marker.txt version-03.txt
+> add marker.txt
+<<<
+> commit "tie 03"
+<<<
++ marker.txt version-04.txt
+> add marker.txt
+<<<
+> commit "tie 04"
+<<<
++ marker.txt version-05.txt
+> add marker.txt
+<<<
+> commit "tie 05"
+<<<
++ marker.txt version-06.txt
+> add marker.txt
+<<<
+> commit "tie 06"
+<<<
++ marker.txt version-07.txt
+> add marker.txt
+<<<
+> commit "tie 07"
+<<<
+> log
+===
+${COMMIT_HEAD}
+tie 07
+
+===
+${COMMIT_HEAD}
+tie 06
+
+===
+${COMMIT_HEAD}
+tie 05
+
+===
+${COMMIT_HEAD}
+tie 04
+
+===
+${COMMIT_HEAD}
+tie 03
+
+===
+${COMMIT_HEAD}
+tie 02
+
+===
+${COMMIT_HEAD}
+tie 01
+
+===
+${COMMIT_HEAD}
+tie 00
+
+===
+${COMMIT_HEAD}
+initial commit
+
+<<<*
+D ID07 "${1}"
+D ID06 "${2}"
+D ID05 "${3}"
+D ID04 "${4}"
+D ID03 "${5}"
+D ID02 "${6}"
+D ID01 "${7}"
+D ID00 "${8}"
+D INITIAL "${9}"
+> global-log
+@require-timestamp-tie
+${ID07}
+${ID06}
+${ID05}
+${ID04}
+${ID03}
+${ID02}
+${ID01}
+${ID00}
+${INITIAL}
+<<<G
+

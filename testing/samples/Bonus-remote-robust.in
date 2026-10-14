@@ -1,0 +1,44 @@
+# Bonus Remote: operand and namespace validation after remote commands work.
+I prelude1.inc
+> add-remote only-name
+Incorrect operands.
+<<<
+> rm-remote
+Incorrect operands.
+<<<
+> push remote
+Incorrect operands.
+<<<
+> fetch remote
+Incorrect operands.
+<<<
+> pull remote
+Incorrect operands.
+<<<
+> add-remote bad/name nowhere
+Incorrect operands.
+<<<
+> branch collision
+<<<
+> add-remote collision nowhere
+A remote with that name already exists.
+<<<
+> add-remote origin nowhere
+<<<
+> branch origin
+A branch with that name already exists.
+<<<
+> status
+=== Branches ===
+collision
+*master
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<

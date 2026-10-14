@@ -1,0 +1,3 @@
+# Ignore temporary files and the rules file itself.
+*.tmp
+.gitliteignore

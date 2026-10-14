@@ -1,0 +1,27 @@
+# Comp-add-01 test: checks each no-op/cancellation through status.
+I setup2.inc
+> add f.txt
+<<<
+I blank-status.inc
++ f.txt notwug.txt
+> add f.txt
+<<<
++ f.txt wug.txt
+> add f.txt
+<<<
+I blank-status.inc
+> rm f.txt
+<<<
+* f.txt
++ f.txt wug.txt
+> add f.txt
+<<<
+I blank-status.inc
+
+# A failed add must not alter an otherwise empty repository state.
+C FAILED
+I prelude1.inc
+> add f.txt
+File does not exist.
+<<<
+I blank-status.inc

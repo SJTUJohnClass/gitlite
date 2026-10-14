@@ -1,0 +1,224 @@
+# Check various merge error cases.
+I setup2.inc
+> branch other
+<<<
++ h.txt wug2.txt
+> add h.txt
+<<<
+> rm g.txt
+<<<
+> commit "Add h.txt and remove g.txt"
+<<<
+> checkout other
+<<<
++ staged.txt wug.txt
+> add staged.txt
+<<<
+> merge missing
+You have uncommitted changes.
+<<<
+> merge other
+You have uncommitted changes.
+<<<
+> status
+=== Branches ===
+master
+*other
+
+=== Staged Files ===
+staged.txt
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<
+> log
+===
+${COMMIT_HEAD}
+Two files
+
+===
+${COMMIT_HEAD}
+initial commit
+
+<<<*
+> rm staged.txt
+<<<
+- staged.txt
+> merge other
+Cannot merge a branch with itself.
+<<<
+> status
+=== Branches ===
+master
+*other
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<
+> log
+===
+${COMMIT_HEAD}
+Two files
+
+===
+${COMMIT_HEAD}
+initial commit
+
+<<<*
+> rm f.txt
+<<<
++ k.txt wug3.txt
+> add k.txt
+<<<
+> commit "Add k.txt and remove f.txt"
+<<<
+> checkout master
+<<<
+> merge foobar
+A branch with that name does not exist.
+<<<
+= f.txt wug.txt
+= h.txt wug2.txt
+* g.txt
+I blank-status2.inc
+> log
+===
+${COMMIT_HEAD}
+Add h.txt and remove g.txt
+
+===
+${COMMIT_HEAD}
+Two files
+
+===
+${COMMIT_HEAD}
+initial commit
+
+<<<*
++ k.txt wug.txt
+> merge other
+There is an untracked file in the way; delete it, or add and commit it first.
+<<<
+= k.txt wug.txt
+> status
+=== Branches ===
+*master
+other
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+k.txt
+
+<<<
+> log
+===
+${COMMIT_HEAD}
+Add h.txt and remove g.txt
+
+===
+${COMMIT_HEAD}
+Two files
+
+===
+${COMMIT_HEAD}
+initial commit
+
+<<<*
+- k.txt
+I blank-status2.inc
++ k.txt wug.txt
+> add k.txt
+<<<
+> merge other
+You have uncommitted changes.
+<<<
+> status
+=== Branches ===
+*master
+other
+
+=== Staged Files ===
+k.txt
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<
+= k.txt wug.txt
+> log
+===
+${COMMIT_HEAD}
+Add h.txt and remove g.txt
+
+===
+${COMMIT_HEAD}
+Two files
+
+===
+${COMMIT_HEAD}
+initial commit
+
+<<<*
+> rm k.txt
+<<<
+- k.txt
+I blank-status2.inc
+
+# Ignored untracked files may be overwritten by a non-fast-forward merge.
+C IGNORED
+> init
+<<<
+> branch other
+<<<
+> checkout other
+<<<
++ k.txt wug3.txt
+> add k.txt
+<<<
+> commit "add k on other"
+<<<
+> checkout master
+<<<
++ m.txt wug2.txt
+> add m.txt
+<<<
+> commit "diverge master"
+<<<
++ .gitliteignore ignore-k.txt
++ k.txt wug.txt
+> merge other
+<<<
+= k.txt wug3.txt
+= m.txt wug2.txt
+> status
+=== Branches ===
+*master
+other
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<

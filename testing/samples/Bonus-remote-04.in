@@ -1,0 +1,79 @@
+# Bonus: fetch multiple branches, remove a remote, and add it again.
+C D1
+I setup2.inc
+> branch feature
+<<<
+> checkout feature
+<<<
++ h.txt wug2.txt
+> add h.txt
+<<<
+> commit "Add h on feature"
+<<<
+
+C D2
+> init
+<<<
+> add-remote R1 ../D1/.gitlite
+<<<
+> fetch R1 feature
+<<<
+> fetch R1 master
+<<<
+> status
+=== Branches ===
+R1/feature
+R1/master
+*master
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<
+> checkout R1/feature
+<<<
+= f.txt wug.txt
+= g.txt notwug.txt
+= h.txt wug2.txt
+> status
+=== Branches ===
+*R1/feature
+R1/master
+master
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<
+> checkout master
+<<<
+* f.txt
+* g.txt
+* h.txt
+> rm-remote R1
+<<<
+> fetch R1 master
+Remote directory not found.
+<<<
+> push R1 master
+Remote directory not found.
+<<<
+> add-remote R1 ../D1/.gitlite
+<<<
+> fetch R1 master
+<<<
+> checkout R1/master
+<<<
+= f.txt wug.txt
+= g.txt notwug.txt
+* h.txt

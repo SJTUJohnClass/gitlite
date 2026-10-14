@@ -1,0 +1,89 @@
+# Goal: checkout accepts a unique abbreviated commit ID.
+# Check that we can check out a previous version.
+> init
+<<<
++ wug.txt wug.txt
+> add wug.txt
+<<<
+> commit "version 1 of wug.txt"
+<<<
++ wug.txt notwug.txt
+> add wug.txt
+<<<
+> commit "version 2 of wug.txt"
+<<<
+= wug.txt notwug.txt
+# Each ${HEADER} captures an abbreviation of its full commit UID.
+# With high probability, it is unique.
+D HEADER "commit ([a-f0-9]{8})[a-f0-9]{32}"
+D DATE "Date: \w{3} \w{3} \d{2} \d{2}:\d{2}:\d{2} \d{4} [-+]\d{4}"
+> log
+===
+${HEADER}
+${DATE}
+version 2 of wug.txt
+
+===
+${HEADER}
+${DATE}
+version 1 of wug.txt
+
+===
+${HEADER}
+${DATE}
+initial commit
+
+<<<*
+# UID of second version
+D UID2 "${1}"
+# UID of current version
+D UID1 "${2}"
+> tag version-one ${UID1}
+<<<
+> checkout version-one -- wug.txt
+<<<
+= wug.txt wug.txt
+> checkout ${UID2} -- wug.txt
+<<<
+= wug.txt notwug.txt
+
+# A branch and a tag may share a name. One-operand checkout selects the branch,
+# while revision checkout resolves the exact tag.
+C NAMESPACE
+> init
+<<<
++ f.txt wug.txt
+> add f.txt
+<<<
+> commit "version one"
+<<<
+> branch same
+<<<
++ f.txt notwug.txt
+> add f.txt
+<<<
+> commit "version two"
+<<<
+> tag same
+<<<
+> checkout same
+<<<
+= f.txt wug.txt
+> checkout same -- f.txt
+<<<
+= f.txt notwug.txt
+> status
+=== Branches ===
+master
+*same
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+f.txt (modified)
+
+=== Untracked Files ===
+
+<<<

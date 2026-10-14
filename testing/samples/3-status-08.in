@@ -1,0 +1,7 @@
+# Goal: empty-command and not-initialized error handling.
+>
+Please enter a command.
+<<<
+> status
+Not in an initialized Gitlite directory.
+<<<

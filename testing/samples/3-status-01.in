@@ -1,0 +1,3 @@
+# Goal: show the empty status sections immediately after initialization.
+I prelude1.inc
+I blank-status.inc

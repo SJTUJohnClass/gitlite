@@ -1,0 +1,60 @@
+# Comp-ignore-add test: ignored/tracked files remain checkout-safe.
+> init
+<<<
++ .gitliteignore ignore-track.txt
+> add .gitliteignore
+<<<
+> commit "track ignore rules"
+<<<
++ cache.tmp wug.txt
+> add cache.tmp
+<<<
+> add missing.tmp
+File does not exist.
+<<<
+* missing.tmp
+I blank-status.inc
+> commit "ignored file"
+No changes added to the commit.
+<<<
++ .gitliteignore ignore-edge-crlf.txt
+> add .gitliteignore
+<<<
++ root-only.dat wug.txt
++ literal*.dat wug.txt
++ literal?.dat wug.txt
++ drop.tmp wug.txt
++ keep.tmp notwug.txt
+> add root-only.dat
+<<<
+> add literal*.dat
+<<<
+> add literal?.dat
+<<<
+> add drop.tmp
+<<<
+> add keep.tmp
+<<<
+> commit "update rules and keep exception"
+<<<
+- .gitliteignore
+- keep.tmp
+> checkout -- .gitliteignore
+<<<
+> checkout -- keep.tmp
+<<<
+= .gitliteignore ignore-edge-crlf.txt
+= keep.tmp notwug.txt
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<

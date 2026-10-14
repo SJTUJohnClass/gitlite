@@ -1,0 +1,56 @@
+# Bonus: show the current commit as one log entry followed by its first-parent diff.
+> init
+<<<
+D DATE "Date: \w{3} \w{3} \d{2} \d{2}:\d{2}:\d{2} \d{4} [-+]\d{4}"
++ f.txt wug.txt
+> add f.txt
+<<<
+> commit "add f"
+<<<
+> log
+===
+commit ([a-f0-9]{40})
+(Date: \w{3} \w{3} \d{2} \d{2}:\d{2}:\d{2} \d{4} [-+]\d{4})
+add f
+
+===
+commit [a-f0-9]{40}
+${DATE}
+initial commit
+
+<<<*
+D SHOWN "${1}"
+D SHOWN_DATE "${2}"
++ f.txt notwug.txt
+> add f.txt
+<<<
++ f.txt wug2.txt
++ untracked.txt wug3.txt
+> show
+===
+commit ${SHOWN}
+${SHOWN_DATE}
+add f
+
+diff --gitlite a/f.txt b/f.txt
+--- /dev/null
++++ b/f.txt
+@@ -0,0 +1,1 @@
++This is a wug.
+<<<
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+f.txt
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+f.txt (modified)
+
+=== Untracked Files ===
+untracked.txt
+
+<<<

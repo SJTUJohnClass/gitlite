@@ -1,0 +1,7 @@
+# Exercise wildcard, single-character, negation and escaped prefixes.
+*.log
+!important.log
+cache-?
+\#notes
+\!literal
+.gitliteignore

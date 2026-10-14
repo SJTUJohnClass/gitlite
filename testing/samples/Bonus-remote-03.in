@@ -1,0 +1,176 @@
+# Bonus: test error conditions for remote commands
+C D1
+I setup2.inc
+> log
+===
+${COMMIT_HEAD}
+Two files
+
+===
+${COMMIT_HEAD}
+initial commit
+
+<<<*
+D R1_TWO "${1}"
+D R1_INIT "${2}"
+
+# Set up second repository with one commit + inita.
+
+C D2
+> init
+<<<
++ pending.txt wug.txt
+> add pending.txt
+<<<
+> fetch missing master
+Remote directory not found.
+<<<
+> push missing master
+Remote directory not found.
+<<<
+> pull missing master
+Remote directory not found.
+<<<
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+pending.txt
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<
+> rm pending.txt
+<<<
+- pending.txt
++ k.txt wug2.txt
+> add k.txt
+<<<
+> commit "Add k in repo 2"
+<<<
+> log
+===
+${COMMIT_HEAD}
+Add k in repo 2
+
+===
+${COMMIT_HEAD}
+initial commit
+
+<<<*
+D R2_K "${1}"
+D R2_INIT "${2}"
+
+# Fetch remote master and reset our master to it.
+# Then add another commit and push.
+> add-remote R1 ../Dx/.gitlite
+<<<
+> add-remote R1 ../D1/.gitlite
+A remote with that name already exists.
+<<<
+> fetch R1 master
+Remote directory not found.
+<<<
+> push R1 master
+Remote directory not found.
+<<<
+> rm-remote R1
+<<<
+> rm-remote glorp
+A remote with that name does not exist.
+<<<
+> add-remote R1 ../D1/.gitlite
+<<<
++ pending.txt wug.txt
+> add pending.txt
+<<<
+> pull R1 glorp
+That remote does not have that branch.
+<<<
+> pull R1 master
+You have uncommitted changes.
+<<<
+> status
+=== Branches ===
+R1/master
+*master
+
+=== Staged Files ===
+pending.txt
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<
+> rm pending.txt
+<<<
+- pending.txt
+> fetch R1 glorp
+That remote does not have that branch.
+<<<
+> status
+=== Branches ===
+R1/master
+*master
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<
+> log
+===
+commit ${R2_K}
+${DATE}
+Add k in repo 2
+
+===
+commit ${R2_INIT}
+${DATE}
+initial commit
+
+<<<*
+> push R1 master
+Please pull down remote changes before pushing.
+<<<
+= k.txt wug2.txt
+> log
+===
+commit ${R2_K}
+${DATE}
+Add k in repo 2
+
+===
+commit ${R2_INIT}
+${DATE}
+initial commit
+
+<<<*
+C D1
+= f.txt wug.txt
+= g.txt notwug.txt
+* k.txt
+> log
+===
+commit ${R1_TWO}
+${DATE}
+Two files
+
+===
+commit ${R1_INIT}
+${DATE}
+initial commit
+
+<<<*

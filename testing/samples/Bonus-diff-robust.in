@@ -1,0 +1,36 @@
+# Bonus Diff + Show: operand, initialization, and invalid-revision handling.
+> diff
+Not in an initialized Gitlite directory.
+<<<
+> show
+Not in an initialized Gitlite directory.
+<<<
+> init
+<<<
+D DATE "Date: \w{3} \w{3} \d{2} \d{2}:\d{2}:\d{2} \d{4} [-+]\d{4}"
+D COMMIT_HEAD "commit ([a-f0-9]{40})\n(?:Merge: [0-9a-f]{7} [0-9a-f]{7}\n)?${DATE}"
+> log
+===
+${COMMIT_HEAD}
+initial commit
+
+<<<*
+D INITIAL "${1}"
+> diff one two three
+Incorrect operands.
+<<<
+> show one two
+Incorrect operands.
+<<<
+> diff 025052f2b193d417df998517a4c539918801b430
+No commit with that id exists.
+<<<
+> diff 025052f2b193d417df998517a4c539918801b430 ${INITIAL}
+No commit with that id exists.
+<<<
+> diff ${INITIAL} 025052f2b193d417df998517a4c539918801b430
+No commit with that id exists.
+<<<
+> show 025052f2b193d417df998517a4c539918801b430
+No commit with that id exists.
+<<<

@@ -1,0 +1,79 @@
+# Goal: status, branch and rm-branch operand validation after Subtask 3 works.
+> status extra
+Not in an initialized Gitlite directory.
+<<<
+> init
+<<<
+> status extra
+Incorrect operands.
+<<<
+> branch
+Incorrect operands.
+<<<
+> rm-branch
+Incorrect operands.
+<<<
+> branch one two
+Incorrect operands.
+<<<
+> rm-branch one two
+Incorrect operands.
+<<<
+> branch bad/name
+Incorrect operands.
+<<<
+> rm-branch bad/name
+Incorrect operands.
+<<<
+> branch .dev
+Incorrect operands.
+<<<
+> branch _dev
+Incorrect operands.
+<<<
+> branch -dev
+Incorrect operands.
+<<<
+> branch "bad\\name"
+Incorrect operands.
+<<<
+> branch "bad name"
+Incorrect operands.
+<<<
+> branch 开发
+Incorrect operands.
+<<<
+> rm-branch .dev
+Incorrect operands.
+<<<
+> rm-branch "bad\\name"
+Incorrect operands.
+<<<
+I blank-status.inc
+
+# Legal punctuation after the first character and case-sensitive names.
+C NAMES
+> init
+<<<
+> branch A0._-x
+<<<
+> branch Dev
+<<<
+> branch dev
+<<<
+> status
+=== Branches ===
+A0._-x
+Dev
+dev
+*master
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<

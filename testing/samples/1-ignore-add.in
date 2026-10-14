@@ -1,0 +1,48 @@
+# Goal: ignore-rule add semantics, precedence, escaping, and tracked exceptions.
+> init
+<<<
++ .gitliteignore ignore-track.txt
+> add .gitliteignore
+<<<
+> commit "track ignore rules"
+<<<
++ cache.tmp wug.txt
+> add cache.tmp
+<<<
+> add missing.tmp
+File does not exist.
+<<<
+* missing.tmp
+> commit "ignored file"
+No changes added to the commit.
+<<<
++ .gitliteignore ignore-edge-crlf.txt
+> add .gitliteignore
+<<<
++ root-only.dat wug.txt
++ literal*.dat wug.txt
++ literal?.dat wug.txt
++ drop.tmp wug.txt
++ keep.tmp notwug.txt
+> add root-only.dat
+<<<
+> add literal*.dat
+<<<
+> add literal?.dat
+<<<
+> add drop.tmp
+<<<
+> add keep.tmp
+<<<
+> commit "update rules and keep exception"
+<<<
++ .gitliteignore ignore-all.txt
+> add .gitliteignore
+<<<
+> commit "ignore everything"
+<<<
++ keep.tmp wug2.txt
+> add keep.tmp
+<<<
+> commit "tracked files remain addable when ignored"
+<<<

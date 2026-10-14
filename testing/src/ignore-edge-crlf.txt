@@ -1,0 +1,6 @@
+/root-only.dat
+literal\*.dat
+literal\?.dat
+*.tmp
+!keep.tmp
+.gitliteignore

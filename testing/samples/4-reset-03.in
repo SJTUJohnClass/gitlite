@@ -1,0 +1,52 @@
+# Reset may move back to the initial commit and forward again, clearing staging.
+I setup2.inc
+> log
+===
+${COMMIT_HEAD}
+Two files
+
+===
+${COMMIT_HEAD}
+initial commit
+
+<<<*
+D TWO "${1}"
+D INIT "${2}"
+> tag base ${TWO}
+<<<
++ h.txt wug2.txt
+> add h.txt
+<<<
+> commit "Add h"
+<<<
+E h.txt
+> reset ${INIT}
+<<<
+* f.txt
+* g.txt
+* h.txt
+> reset base
+<<<
+= f.txt wug.txt
+= g.txt notwug.txt
+* h.txt
++ m.txt wug3.txt
+> add m.txt
+<<<
+> reset ${TWO}
+<<<
+E m.txt
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+m.txt
+
+<<<

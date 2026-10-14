@@ -1,0 +1,26 @@
+# Check error message for removal of unstaged, untracked file.
+I prelude1.inc
++ f.txt wug.txt
+> rm f.txt
+No reason to remove the file.
+<<<
+> add f.txt
+<<<
+> rm f.txt
+<<<
+E f.txt
+> commit "nothing staged"
+No changes added to the commit.
+<<<
+> add f.txt
+<<<
+> commit "track f"
+<<<
+> rm f.txt
+<<<
+* f.txt
+> commit "remove f"
+<<<
+> rm f.txt
+No reason to remove the file.
+<<<

@@ -1,0 +1,60 @@
+# Goal: create branches without switching and reject a duplicate name.
+> init
+<<<
+> branch dev
+<<<
+> branch release
+<<<
+> branch dev
+A branch with that name already exists.
+<<<
+> status
+=== Branches ===
+dev
+*master
+release
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<
+
+# Creating a branch changes only refs and preserves all other state.
+C STATE
+I setup2.inc
++ k.txt wug2.txt
+> add k.txt
+<<<
+> rm g.txt
+<<<
++ f.txt notwug.txt
++ u.txt wug3.txt
+> branch snapshot
+<<<
+> status
+=== Branches ===
+*master
+snapshot
+
+=== Staged Files ===
+k.txt
+
+=== Removed Files ===
+g.txt
+
+=== Modifications Not Staged For Commit ===
+f.txt (modified)
+
+=== Untracked Files ===
+u.txt
+
+<<<
+= f.txt notwug.txt
+* g.txt
+= k.txt wug2.txt
+= u.txt wug3.txt

@@ -1,0 +1,83 @@
+# Goal: remove and recreate branches while protecting the current branch.
+> init
+<<<
+> branch alpha
+<<<
+> branch beta
+<<<
+> rm-branch alpha
+<<<
+> status
+=== Branches ===
+beta
+*master
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<
+> rm-branch alpha
+A branch with that name does not exist.
+<<<
+> rm-branch master
+Cannot remove the current branch.
+<<<
+> branch alpha
+<<<
+> status
+=== Branches ===
+alpha
+beta
+*master
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<
+
+# Removing a branch changes only its ref, preserving every other repository
+# and working-tree state.
+C STATE
+I setup2.inc
+> branch snapshot
+<<<
++ k.txt wug2.txt
+> add k.txt
+<<<
+> rm g.txt
+<<<
++ f.txt notwug.txt
++ u.txt wug3.txt
+> rm-branch snapshot
+<<<
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+k.txt
+
+=== Removed Files ===
+g.txt
+
+=== Modifications Not Staged For Commit ===
+f.txt (modified)
+
+=== Untracked Files ===
+u.txt
+
+<<<
+= f.txt notwug.txt
+* g.txt
+= k.txt wug2.txt
+= u.txt wug3.txt

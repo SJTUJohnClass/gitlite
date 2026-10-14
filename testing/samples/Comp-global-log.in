@@ -1,0 +1,162 @@
+# Check global-log after the branch, checkout, reset, rm-branch and tag
+# features needed to create and remove different kinds of reachability.
+
+# A live non-current branch is a traversal root. Removing its last reference
+# makes its unique commit disappear from global-log.
+I prelude1.inc
+> branch other
+<<<
++ f.txt wug.txt
+> add f.txt
+<<<
+> commit "File f.txt"
+<<<
+> log
+===
+${COMMIT_HEAD}
+File f.txt
+
+===
+${COMMIT_HEAD}
+initial commit
+
+<<<*
+D F_COMMIT "${1}"
+D SHARED_INITIAL "${2}"
+> checkout other
+<<<
++ g.txt notwug.txt
+> add g.txt
+<<<
+> commit "File g.txt"
+<<<
+> log
+===
+${COMMIT_HEAD}
+File g.txt
+
+${ARBLINES}
+<<<*
+D G_COMMIT "${1}"
+> global-log
+${F_COMMIT}
+${G_COMMIT}
+${SHARED_INITIAL}
+<<<G
+> checkout master
+<<<
+> rm-branch other
+<<<
+> global-log
+${F_COMMIT}
+${SHARED_INITIAL}
+<<<G
+> checkout ${G_COMMIT} -- g.txt
+<<<
+= g.txt notwug.txt
+
+# A tag remains a traversal root after reset moves the branch away.
+C tagged
+I setup2.inc
++ h.txt wug.txt
+> add h.txt
+<<<
+> commit "Add h"
+<<<
+> log
+===
+${COMMIT_HEAD}
+Add h
+
+===
+${COMMIT_HEAD}
+Two files
+
+===
+${COMMIT_HEAD}
+initial commit
+
+<<<*
+D TAGGED_COMMIT "${1}"
+D TAGGED_PARENT "${2}"
+D TAGGED_INITIAL "${3}"
+> tag saved
+<<<
+> reset ${TAGGED_PARENT}
+<<<
+> global-log
+${TAGGED_COMMIT}
+${TAGGED_PARENT}
+${TAGGED_INITIAL}
+<<<G
+
+# A reachable merge commit exposes both parent histories. The shared base is
+# reachable through both sides but must still appear exactly once.
+C MERGED
+I prelude1.inc
++ base.txt wug.txt
+> add base.txt
+<<<
+> commit "merge base"
+<<<
+> log
+===
+${COMMIT_HEAD}
+merge base
+
+===
+${COMMIT_HEAD}
+initial commit
+
+<<<*
+D MERGE_BASE "${1}"
+D MERGE_INITIAL "${2}"
+> branch side
+<<<
++ main.txt notwug.txt
+> add main.txt
+<<<
+> commit "main history"
+<<<
+> log
+===
+${COMMIT_HEAD}
+main history
+
+${ARBLINES}
+<<<*
+D MERGE_MAIN "${1}"
+> checkout side
+<<<
++ side.txt wug2.txt
+> add side.txt
+<<<
+> commit "side history"
+<<<
+> log
+===
+${COMMIT_HEAD}
+side history
+
+${ARBLINES}
+<<<*
+D MERGE_SIDE "${1}"
+> checkout master
+<<<
+> merge side
+<<<
+> log
+===
+${COMMIT_HEAD}
+Merged side into master\.
+
+${ARBLINES}
+<<<*
+D MERGE_COMMIT "${1}"
+> global-log
+${MERGE_COMMIT}
+${MERGE_MAIN}
+${MERGE_SIDE}
+${MERGE_BASE}
+${MERGE_INITIAL}
+<<<G

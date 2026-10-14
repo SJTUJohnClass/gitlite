@@ -1,0 +1,106 @@
+# Subtask3: ignored files stay out of untracked status output.
+> init
+<<<
++ .gitliteignore ignore-patterns.txt
++ ignored.log wug.txt
++ important.log wug.txt
++ cache-a wug.txt
++ cache-ab wug.txt
++ #notes wug.txt
++ !literal wug.txt
++ plain.dat wug.txt
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+cache-ab
+important.log
+plain.dat
+
+<<<
+> add important.log
+<<<
+> add ignored.log
+<<<
++ .gitliteignore ignore-all.txt
++ important.log notwug.txt
+> add important.log
+<<<
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+important.log
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<
+
+# Creating a tag neither changes staging nor adds the tag to Branches.
+C TAG-STATE
+> init
+<<<
++ pending.txt wug.txt
+> add pending.txt
+<<<
+> tag marker
+<<<
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+pending.txt
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<
+C
+> commit "track important"
+<<<
++ important.log wug2.txt
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+important.log (modified)
+
+=== Untracked Files ===
+
+<<<
+- important.log
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+important.log (deleted)
+
+=== Untracked Files ===
+
+<<<

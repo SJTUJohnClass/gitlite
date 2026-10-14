@@ -1,0 +1,17 @@
+# Re-staging a modified file; removing a staged-but-untracked file unstages it.
+I setup2.inc
++ f.txt notwug.txt
+> add f.txt
+<<<
+> commit "Modified f"
+<<<
+= f.txt notwug.txt
++ k.txt wug2.txt
+> add k.txt
+<<<
+> rm k.txt
+<<<
+E k.txt
+> rm k.txt
+No reason to remove the file.
+<<<

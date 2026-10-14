@@ -1,0 +1,164 @@
+# Subtask3: report all untracked and unstaged modification states.
+I prelude1.inc
++ f.txt wug.txt
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+f.txt
+
+<<<
+
+# All file sections sort independently by path, and mixed modification kinds
+# appear once each in filename order.
+C SORT
+> init
+<<<
++ a.txt wug.txt
++ b.txt wug.txt
++ c.txt wug.txt
++ e.txt wug.txt
+> add a.txt
+<<<
+> add b.txt
+<<<
+> add c.txt
+<<<
+> add e.txt
+<<<
+> commit "sorting base"
+<<<
+> rm e.txt
+<<<
+> rm c.txt
+<<<
+- a.txt
++ b.txt notwug.txt
++ z.txt wug.txt
++ m.txt wug.txt
+> add z.txt
+<<<
+> add m.txt
+<<<
++ z.txt wug2.txt
++ y.txt wug.txt
++ x.txt wug.txt
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+m.txt
+z.txt
+
+=== Removed Files ===
+c.txt
+e.txt
+
+=== Modifications Not Staged For Commit ===
+a.txt (deleted)
+b.txt (modified)
+z.txt (modified)
+
+=== Untracked Files ===
+x.txt
+y.txt
+
+<<<
+C
+> add f.txt
+<<<
+> commit "Add f"
+<<<
++ f.txt notwug.txt
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+f.txt (modified)
+
+=== Untracked Files ===
+
+<<<
+- f.txt
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+f.txt (deleted)
+
+=== Untracked Files ===
+
+<<<
++ f.txt notwug.txt
+> add f.txt
+<<<
++ f.txt wug2.txt
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+f.txt
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+f.txt (modified)
+
+=== Untracked Files ===
+
+<<<
+- f.txt
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+f.txt
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+f.txt (deleted)
+
+=== Untracked Files ===
+
+<<<
+> commit "commit staged version"
+<<<
+> rm f.txt
+<<<
++ f.txt wug2.txt
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+
+=== Removed Files ===
+f.txt
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+f.txt
+
+<<<

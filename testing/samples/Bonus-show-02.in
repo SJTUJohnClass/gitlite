@@ -1,0 +1,27 @@
+# Bonus: show accepts tags and an initial commit has no following diff.
+> init
+<<<
+D DATE "Date: \w{3} \w{3} \d{2} \d{2}:\d{2}:\d{2} \d{4} [-+]\d{4}"
+> log
+===
+commit ([a-f0-9]{40})
+(Date: \w{3} \w{3} \d{2} \d{2}:\d{2}:\d{2} \d{4} [-+]\d{4})
+initial commit
+
+<<<*
+D INITIAL "${1}"
+D INITIAL_DATE "${2}"
+> tag beginning
+<<<
++ f.txt wug.txt
+> add f.txt
+<<<
+> commit "later"
+<<<
+> show beginning
+===
+commit ${INITIAL}
+${INITIAL_DATE}
+initial commit
+
+<<<

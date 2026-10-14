@@ -1,0 +1,15 @@
+# Goal: commit uses the staged snapshot and does not rewrite the working file.
+I prelude1.inc
++ f.txt wug.txt
+> add f.txt
+<<<
+>commit ""
+Please enter a commit message.
+<<<
++ f.txt notwug.txt
+> commit "uses staged snapshot"
+<<<
+= f.txt notwug.txt
+> commit "nothing else staged"
+No changes added to the commit.
+<<<

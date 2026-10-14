@@ -1,0 +1,237 @@
+# Goal: checkout resolves an ambiguous abbreviated ID lexicographically.
+I prelude1.inc
++ marker.txt version-00.txt
+> add marker.txt
+<<<
+> commit "version 00"
+<<<
+> log
+===
+${COMMIT_HEAD}
+version 00
+
+===
+${COMMIT_HEAD}
+initial commit
+
+${ARBLINES}
+<<<*
+D ID00 "${1}"
+D INITIAL "${2}"
++ marker.txt version-01.txt
+> add marker.txt
+<<<
+> commit "version 01"
+<<<
+> log
+===
+${COMMIT_HEAD}
+version 01
+
+${ARBLINES}
+<<<*
+D ID01 "${1}"
++ marker.txt version-02.txt
+> add marker.txt
+<<<
+> commit "version 02"
+<<<
+> log
+===
+${COMMIT_HEAD}
+version 02
+
+${ARBLINES}
+<<<*
+D ID02 "${1}"
++ marker.txt version-03.txt
+> add marker.txt
+<<<
+> commit "version 03"
+<<<
+> log
+===
+${COMMIT_HEAD}
+version 03
+
+${ARBLINES}
+<<<*
+D ID03 "${1}"
++ marker.txt version-04.txt
+> add marker.txt
+<<<
+> commit "version 04"
+<<<
+> log
+===
+${COMMIT_HEAD}
+version 04
+
+${ARBLINES}
+<<<*
+D ID04 "${1}"
++ marker.txt version-05.txt
+> add marker.txt
+<<<
+> commit "version 05"
+<<<
+> log
+===
+${COMMIT_HEAD}
+version 05
+
+${ARBLINES}
+<<<*
+D ID05 "${1}"
++ marker.txt version-06.txt
+> add marker.txt
+<<<
+> commit "version 06"
+<<<
+> log
+===
+${COMMIT_HEAD}
+version 06
+
+${ARBLINES}
+<<<*
+D ID06 "${1}"
++ marker.txt version-07.txt
+> add marker.txt
+<<<
+> commit "version 07"
+<<<
+> log
+===
+${COMMIT_HEAD}
+version 07
+
+${ARBLINES}
+<<<*
+D ID07 "${1}"
++ marker.txt version-08.txt
+> add marker.txt
+<<<
+> commit "version 08"
+<<<
+> log
+===
+${COMMIT_HEAD}
+version 08
+
+${ARBLINES}
+<<<*
+D ID08 "${1}"
++ marker.txt version-09.txt
+> add marker.txt
+<<<
+> commit "version 09"
+<<<
+> log
+===
+${COMMIT_HEAD}
+version 09
+
+${ARBLINES}
+<<<*
+D ID09 "${1}"
++ marker.txt version-10.txt
+> add marker.txt
+<<<
+> commit "version 10"
+<<<
+> log
+===
+${COMMIT_HEAD}
+version 10
+
+${ARBLINES}
+<<<*
+D ID10 "${1}"
++ marker.txt version-11.txt
+> add marker.txt
+<<<
+> commit "version 11"
+<<<
+> log
+===
+${COMMIT_HEAD}
+version 11
+
+${ARBLINES}
+<<<*
+D ID11 "${1}"
++ marker.txt version-12.txt
+> add marker.txt
+<<<
+> commit "version 12"
+<<<
+> log
+===
+${COMMIT_HEAD}
+version 12
+
+${ARBLINES}
+<<<*
+D ID12 "${1}"
++ marker.txt version-13.txt
+> add marker.txt
+<<<
+> commit "version 13"
+<<<
+> log
+===
+${COMMIT_HEAD}
+version 13
+
+${ARBLINES}
+<<<*
+D ID13 "${1}"
++ marker.txt version-14.txt
+> add marker.txt
+<<<
+> commit "version 14"
+<<<
+> log
+===
+${COMMIT_HEAD}
+version 14
+
+${ARBLINES}
+<<<*
+D ID14 "${1}"
++ marker.txt version-15.txt
+> add marker.txt
+<<<
+> commit "version 15"
+<<<
+> log
+===
+${COMMIT_HEAD}
+version 15
+
+${ARBLINES}
+<<<*
+D ID15 "${1}"
++ marker.txt version-16.txt
+> add marker.txt
+<<<
+> commit "version 16"
+<<<
+> log
+===
+${COMMIT_HEAD}
+version 16
+
+${ARBLINES}
+<<<*
+D ID16 "${1}"
+A AMBIG EXPECTED_ASSET ${ID00} version-00.txt ${ID01} version-01.txt ${ID02} version-02.txt ${ID03} version-03.txt ${ID04} version-04.txt ${ID05} version-05.txt ${ID06} version-06.txt ${ID07} version-07.txt ${ID08} version-08.txt ${ID09} version-09.txt ${ID10} version-10.txt ${ID11} version-11.txt ${ID12} version-12.txt ${ID13} version-13.txt ${ID14} version-14.txt ${ID15} version-15.txt ${ID16} version-16.txt ${INITIAL} !exclude
++ marker.txt wug.txt
+> checkout ${AMBIG} -- marker.txt
+<<<
+= marker.txt ${EXPECTED_ASSET}
+# A complete 40-character object ID must resolve to that exact commit.
+> checkout ${ID00} -- marker.txt
+<<<
+= marker.txt version-00.txt

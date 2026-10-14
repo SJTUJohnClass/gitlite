@@ -1,0 +1,21 @@
+# Goal: checkout and reset operand validation after Subtask 4 works.
+I prelude1.inc
+> checkout
+Incorrect operands.
+<<<
+> checkout --
+No such branch exists.
+<<<
+> reset
+Incorrect operands.
+<<<
+> checkout a b c d
+Incorrect operands.
+<<<
+> checkout -- nested/file.txt
+Incorrect operands.
+<<<
+> reset one two
+Incorrect operands.
+<<<
+I blank-status.inc

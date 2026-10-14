@@ -1,0 +1,45 @@
+# Goal: checkout restores a file from a specified commit.
+> init
+<<<
++ wug.txt wug.txt
+> add wug.txt
+<<<
+> commit "version 1 of wug.txt"
+<<<
++ wug.txt notwug.txt
+> add wug.txt
+<<<
+> commit "version 2 of wug.txt"
+<<<
+= wug.txt notwug.txt
+# Each ${HEADER} captures its commit UID.
+D UID "[a-f0-9]{40}"
+D HEADER "commit (${UID})"
+D DATE "Date: \w{3} \w{3} \d{2} \d{2}:\d{2}:\d{2} \d{4} [-+]\d{4}"
+> log
+===
+${HEADER}
+${DATE}
+version 2 of wug.txt
+
+===
+${HEADER}
+${DATE}
+version 1 of wug.txt
+
+===
+${HEADER}
+${DATE}
+initial commit
+
+<<<*
+# UID of second version
+D UID2 "${1}"
+# UID of current version
+D UID1 "${2}"
+> checkout ${UID1} -- wug.txt
+<<<
+= wug.txt wug.txt
+> checkout ${UID2} -- wug.txt
+<<<
+= wug.txt notwug.txt

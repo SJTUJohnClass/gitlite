@@ -1,0 +1,59 @@
+# Bonus: show displays merge metadata and compares a merge commit with its first parent.
+> init
+<<<
+D DATE "Date: \w{3} \w{3} \d{2} \d{2}:\d{2}:\d{2} \d{4} [-+]\d{4}"
++ base.txt wug.txt
+> add base.txt
+<<<
+> commit "base"
+<<<
+> branch side
+<<<
++ main.txt notwug.txt
+> add main.txt
+<<<
+> commit "main work"
+<<<
+> log
+===
+commit (([a-f0-9]{7})[a-f0-9]{33})
+${DATE}
+main work
+
+===
+commit [a-f0-9]{40}
+${DATE}
+base
+
+===
+commit [a-f0-9]{40}
+${DATE}
+initial commit
+
+<<<*
+D MAIN "${1}"
+D MAIN_ABBR "${2}"
+> checkout side
+<<<
++ side.txt wug2.txt
+> add side.txt
+<<<
+> commit "side work"
+<<<
+> checkout master
+<<<
+> merge side
+<<<
+> show
+===
+commit [a-f0-9]{40}
+Merge: ${MAIN_ABBR} [a-f0-9]{7}
+${DATE}
+Merged side into master.
+
+diff --gitlite a/side\.txt b/side\.txt
+--- /dev/null
+\+\+\+ b/side\.txt
+@@ -0,0 \+1,1 @@
+\+Another wug\.
+<<<*

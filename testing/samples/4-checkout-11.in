@@ -1,0 +1,68 @@
+# Goal: four branches retain independent heads across repeated checkouts.
+I setup2.inc
+> branch alpha
+<<<
+> branch beta
+<<<
+> branch gamma
+<<<
++ f.txt notwug.txt
+> add f.txt
+<<<
+> commit "change master"
+<<<
+> checkout alpha
+<<<
+= f.txt wug.txt
+= g.txt notwug.txt
++ alpha.txt wug3.txt
+> add alpha.txt
+<<<
+> commit "change alpha"
+<<<
+> checkout beta
+<<<
+= f.txt wug.txt
+= g.txt notwug.txt
+* alpha.txt
++ g.txt wug2.txt
+> add g.txt
+<<<
+> commit "change beta"
+<<<
+> checkout gamma
+<<<
+= f.txt wug.txt
+= g.txt notwug.txt
+* alpha.txt
+> checkout master
+<<<
+= f.txt notwug.txt
+= g.txt notwug.txt
+* alpha.txt
+> checkout alpha
+<<<
+= f.txt wug.txt
+= g.txt notwug.txt
+= alpha.txt wug3.txt
+> checkout beta
+<<<
+= f.txt wug.txt
+= g.txt wug2.txt
+* alpha.txt
+> status
+=== Branches ===
+alpha
+*beta
+gamma
+master
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<

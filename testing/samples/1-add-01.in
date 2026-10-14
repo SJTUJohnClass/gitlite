@@ -1,0 +1,25 @@
+# Check that adding a tracked, unchanged file has no effect.
+I setup2.inc
+> add f.txt
+<<<
+> commit "unchanged add"
+No changes added to the commit.
+<<<
++ f.txt notwug.txt
+> add f.txt
+<<<
++ f.txt wug.txt
+> add f.txt
+<<<
+> commit "reverted add"
+No changes added to the commit.
+<<<
+> rm f.txt
+<<<
+* f.txt
++ f.txt wug.txt
+> add f.txt
+<<<
+> commit "restored removal"
+No changes added to the commit.
+<<<

@@ -1,0 +1,131 @@
+# Bonus: no differences, diff against a given commit, and diff edge cases.
+I setup2.inc
+> diff
+<<<
++ f.txt notwug.txt
+> log
+===
+commit (([a-f0-9]{8})[a-f0-9]{32})
+${DATE}
+Two files
+
+===
+commit [a-f0-9]{40}
+${DATE}
+initial commit
+
+<<<*
+D TWO "${1}"
+D TWO_ABBR "${2}"
+> tag base ${TWO}
+<<<
+> diff base
+diff --gitlite a/f.txt b/f.txt
+--- a/f.txt
++++ b/f.txt
+@@ -1,1 +1,1 @@
+-This is a wug.
++This is not a wug.
+<<<
+> diff ${TWO} ${TWO}
+<<<
++ multi.txt diff-old.txt
+> add multi.txt
+<<<
+> commit "add multiline file"
+<<<
++ multi.txt diff-new.txt
+> diff
+diff --gitlite a/f.txt b/f.txt
+--- a/f.txt
++++ b/f.txt
+@@ -1,1 +1,1 @@
+-This is a wug.
++This is not a wug.
+diff --gitlite a/multi.txt b/multi.txt
+--- a/multi.txt
++++ b/multi.txt
+@@ -1,6 +1,6 @@
+ line1
+ same2
+-old3
++new3
+ same4
+ same5
+ same6
+@@ -8,5 +8,5 @@
+ same8
+ same9
+ same10
+-old11
++new11
+ same12
+<<<
+
+# Empty-file transitions, LCS tie breaking, and the six-line hunk boundary.
+C EDGE
+> init
+<<<
++ empty.txt empty.bin
++ tie.txt diff-tie-old.txt
++ gap.txt diff-gap6-old.txt
+> add empty.txt
+<<<
+> add tie.txt
+<<<
+> add gap.txt
+<<<
+> commit "diff edge bases"
+<<<
++ empty.txt wug.txt
++ tie.txt diff-tie-new.txt
++ gap.txt diff-gap6-new.txt
+> diff
+diff --gitlite a/empty.txt b/empty.txt
+--- a/empty.txt
++++ b/empty.txt
+@@ -0,0 +1,1 @@
++This is a wug.
+diff --gitlite a/gap.txt b/gap.txt
+--- a/gap.txt
++++ b/gap.txt
+@@ -1,12 +1,12 @@
+ line1
+ same2
+-old3
++new3
+ same4
+ same5
+ same6
+ same7
+ same8
+ same9
+-old10
++new10
+ same11
+ same12
+diff --gitlite a/tie.txt b/tie.txt
+--- a/tie.txt
++++ b/tie.txt
+@@ -1,3 +1,3 @@
+ A
+-B
+ A
++B
+<<<
+> checkout -- gap.txt
+<<<
+> checkout -- tie.txt
+<<<
+> add empty.txt
+<<<
+> commit "empty becomes nonempty"
+<<<
++ empty.txt empty.bin
+> diff
+diff --gitlite a/empty.txt b/empty.txt
+--- a/empty.txt
++++ b/empty.txt
+@@ -1,1 +0,0 @@
+-This is a wug.
+<<<

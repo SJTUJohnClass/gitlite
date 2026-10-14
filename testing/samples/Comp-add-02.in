@@ -1,0 +1,32 @@
+# Comp-add-02 test: an unstaged added file becomes untracked again.
+I setup2.inc
+I blank-status.inc
++ f.txt notwug.txt
+> add f.txt
+<<<
+> commit "Modified f"
+<<<
+= f.txt notwug.txt
++ k.txt wug2.txt
+> add k.txt
+<<<
+> rm k.txt
+<<<
+E k.txt
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+k.txt
+
+<<<
+> rm k.txt
+No reason to remove the file.
+<<<

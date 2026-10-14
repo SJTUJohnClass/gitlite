@@ -1,0 +1,58 @@
+# Goal: a staged file can subsequently be modified or deleted; untracked files sort.
+I setup2.inc
++ k.txt wug2.txt
+> add k.txt
+<<<
++ k.txt wug3.txt
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+k.txt
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+k.txt (modified)
+
+=== Untracked Files ===
+
+<<<
+- k.txt
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+k.txt
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+k.txt (deleted)
+
+=== Untracked Files ===
+
+<<<
++ b.txt wug.txt
++ a.txt notwug.txt
++ c.txt wug2.txt
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+k.txt
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+k.txt (deleted)
+
+=== Untracked Files ===
+a.txt
+b.txt
+c.txt
+
+<<<

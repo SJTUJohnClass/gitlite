@@ -1,0 +1,45 @@
+# Goal: checkout restores a tracked file even when the path is now ignored.
+> init
+<<<
++ .gitliteignore ignore-patterns.txt
++ ignored.log wug.txt
++ important.log wug.txt
++ cache-a wug.txt
++ cache-ab wug.txt
++ #notes wug.txt
++ !literal wug.txt
++ plain.dat wug.txt
+> add important.log
+<<<
+> add ignored.log
+<<<
++ .gitliteignore ignore-all.txt
++ important.log notwug.txt
+> add important.log
+<<<
+> commit "track important"
+<<<
+> branch has-file
+<<<
+> rm important.log
+<<<
+> commit "remove important"
+<<<
++ important.log wug2.txt
+> checkout has-file
+<<<
+= important.log notwug.txt
+> status
+=== Branches ===
+*has-file
+master
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<

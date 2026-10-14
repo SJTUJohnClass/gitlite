@@ -1,0 +1,58 @@
+# Comp-commit-02 test: staged snapshots preserve exact file bytes.
+I prelude1.inc
++ f.txt wug.txt
+> add f.txt
+<<<
+>commit ""
+Please enter a commit message.
+<<<
+> status
+=== Branches ===
+*master
+
+=== Staged Files ===
+f.txt
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+
+<<<
++ f.txt notwug.txt
+> commit "uses staged snapshot"
+<<<
+> checkout -- f.txt
+<<<
+= f.txt wug.txt
++ empty.bin empty.bin
++ binary.bin binary.bin
++ windows.txt crlf.txt
++ nonewline.txt no-final-newline.txt
+> add empty.bin
+<<<
+> add binary.bin
+<<<
+> add windows.txt
+<<<
+> add nonewline.txt
+<<<
+> commit "byte exact files"
+<<<
+- empty.bin
++ binary.bin binary-other.bin
++ windows.txt wug.txt
++ nonewline.txt notwug.txt
+> checkout -- empty.bin
+<<<
+> checkout -- binary.bin
+<<<
+> checkout -- windows.txt
+<<<
+> checkout -- nonewline.txt
+<<<
+B empty.bin empty.bin
+B binary.bin binary.bin
+B windows.txt crlf.txt
+B nonewline.txt no-final-newline.txt

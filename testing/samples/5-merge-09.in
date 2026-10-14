@@ -1,0 +1,128 @@
+# A deletion made only in the given branch is applied without conflict.
+I setup2.inc
+> branch other
+<<<
+> checkout other
+<<<
+> rm g.txt
+<<<
+> commit "Remove g on other"
+<<<
+> checkout master
+<<<
++ h.txt wug2.txt
+> add h.txt
+<<<
+> commit "Add h on master"
+<<<
+> merge other
+<<<
+* g.txt
+= f.txt wug.txt
+= h.txt wug2.txt
+> log
+===
+${COMMIT_HEAD}
+Merged other into master\.
+
+${ARBLINES}
+<<<*
+I blank-status2.inc
+
+# A normal merge only writes paths changed by the merge and preserves an
+# unrelated unstaged modification in the working tree.
+C UNSTAGED
+> init
+<<<
++ keep.txt wug.txt
+> add keep.txt
+<<<
+> commit "base"
+<<<
+> branch side
+<<<
++ master.txt notwug.txt
+> add master.txt
+<<<
+> commit "master diverges"
+<<<
+> checkout side
+<<<
++ side.txt wug2.txt
+> add side.txt
+<<<
+> commit "side diverges"
+<<<
+> checkout master
+<<<
++ keep.txt wug3.txt
+> merge side
+<<<
+= keep.txt wug3.txt
+= master.txt notwug.txt
+= side.txt wug2.txt
+> status
+=== Branches ===
+*master
+side
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+keep.txt (modified)
+
+=== Untracked Files ===
+
+<<<
+
+# Rule 7: deleted on current and unchanged on given leaves a recreated work
+# file untracked and must not report an overwrite error.
+C RULE7
+> init
+<<<
++ x.txt wug.txt
+> add x.txt
+<<<
+> commit "track x"
+<<<
+> branch given
+<<<
+> rm x.txt
+<<<
++ master.txt notwug.txt
+> add master.txt
+<<<
+> commit "delete x on master"
+<<<
+> checkout given
+<<<
++ given.txt wug2.txt
+> add given.txt
+<<<
+> commit "given diverges"
+<<<
+> checkout master
+<<<
++ x.txt wug3.txt
+> merge given
+<<<
+= x.txt wug3.txt
+= master.txt notwug.txt
+= given.txt wug2.txt
+> status
+=== Branches ===
+given
+*master
+
+=== Staged Files ===
+
+=== Removed Files ===
+
+=== Modifications Not Staged For Commit ===
+
+=== Untracked Files ===
+x.txt
+
+<<<

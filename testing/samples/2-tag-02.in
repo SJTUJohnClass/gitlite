@@ -1,0 +1,115 @@
+# Subtask2: tags may target commits or tags and resolve exact names before prefixes.
+> init
+<<<
+D DATE "Date: \w{3} \w{3} \d{2} \d{2}:\d{2}:\d{2} \d{4} [-+]\d{4}"
++ f.txt wug.txt
+> add f.txt
+<<<
+> commit "first"
+<<<
+> log
+===
+commit (([a-f0-9]{8})[a-f0-9]{32})
+${DATE}
+first
+
+===
+commit [a-f0-9]{40}
+${DATE}
+initial commit
+
+<<<*
+D FIRST "${1}"
+D FIRST_ABBR "${2}"
++ f.txt notwug.txt
+> add f.txt
+<<<
+> commit "second"
+<<<
+> log
+===
+commit ([a-f0-9]{40})
+${DATE}
+second
+
+===
+commit [a-f0-9]{40}
+${DATE}
+first
+
+===
+commit [a-f0-9]{40}
+${DATE}
+initial commit
+
+<<<*
+D SECOND "${1}"
+> tag old ${FIRST_ABBR}
+<<<
+> tag alias old
+<<<
+> tag current ${SECOND}
+<<<
+> tag
+alias ${FIRST}
+current ${SECOND}
+old ${FIRST}
+<<<
+> tag missing 025052f2b193d417df998517a4c539918801b430
+No commit with that id exists.
+<<<
+
+# An exact tag name wins even when that name is also another commit's prefix.
+C PRECEDENCE
+> init
+<<<
++ f.txt wug.txt
+> add f.txt
+<<<
+> commit "prefix target"
+<<<
+> log
+===
+commit (([a-f0-9]{8})[a-f0-9]{32})
+${DATE}
+prefix target
+
+===
+commit [a-f0-9]{40}
+${DATE}
+initial commit
+
+<<<*
+D PREFIXED "${1}"
+D PREFIX "${2}"
++ f.txt notwug.txt
+> add f.txt
+<<<
+> commit "tag target"
+<<<
+> log
+===
+commit ([a-f0-9]{40})
+${DATE}
+tag target
+
+===
+commit [a-f0-9]{40}
+${DATE}
+prefix target
+
+===
+commit [a-f0-9]{40}
+${DATE}
+initial commit
+
+<<<*
+D TAG_TARGET "${1}"
+> tag ${PREFIX} ${TAG_TARGET}
+<<<
+> tag resolved ${PREFIX}
+<<<
+> tag
+${PREFIX} ${TAG_TARGET}
+resolved ${TAG_TARGET}
+<<<
