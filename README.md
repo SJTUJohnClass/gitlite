@@ -331,7 +331,7 @@ random.stuff
 
 前两种按文件检出的形式只修改指定工作文件，不修改当前分支、分支头或暂存区。revision 可以是标签、完整提交 ID 或任意长度的提交 ID 前缀，并按`tag`一节规定的规则解析。其失败情况为：
 
-- 如果不存在具有给定 ID 的提交，则打印`No commit with that id exists.`并退出；
+- 如果给定的 revision 无法解析为提交，则打印`No commit with that id exists.`并退出；
 - 如果指定文件不在相应提交中，则打印`File does not exist in that commit.`并退出；
 - 发生错误时不得修改工作目录。
 
@@ -348,13 +348,13 @@ random.stuff
 
 ---
 
-#### `reset`（用法：`gitlite reset [commit-id]`）
+#### `reset`（用法：`gitlite reset [revision]`）
 
 `reset`检出指定 revision 的完整快照：用该提交的版本覆盖其跟踪的工作文件，删除当前提交跟踪但目标提交不跟踪的工作文件，然后把当前分支的头移动到目标提交并清空暂存区。它不会切换当前分支。revision 可以是标签、完整提交 ID 或任意长度的提交 ID 前缀，并按`tag`一节规定的规则解析。
 
 失败情况为：
 
-- 如果不存在具有给定 id 的提交，则打印错误信息`No commit with that id exists.`后退出；
+- 如果给定的 revision 无法解析为提交，则打印错误信息`No commit with that id exists.`后退出；
 - 如果某个将被目标提交覆盖的工作文件未被当前提交跟踪、未暂存待添加且未被 ignore，则打印错误信息`There is an untracked file in the way; delete it, or add and commit it first.`后退出。
 
 **HINT : 该命令本质上是 checkout 一个任意提交，它也会更改当前分支的头。实现该命令时，请学会复用前面的代码。**
@@ -508,7 +508,7 @@ Bonus 分为两个可独立完成的类别：`remote`（包括`add-remote`、`rm
 
 由于输出必须唯一确定，比较范围和格式按以下规则定义：
 
-1. `diff`和`diff [commit ID]`只遍历作为旧版本的提交所跟踪的文件：工作目录中新增的未跟踪文件（包括空文件）不参与比较，但旧提交跟踪而工作目录已删除的文件需要输出为删除。`diff [commit ID1] [commit ID2]`比较两个提交所跟踪文件名的并集。三种形式都忽略暂存区。
+1. `diff`和`diff [revision]`只遍历作为旧版本的提交所跟踪的文件：工作目录中新增的未跟踪文件（包括空文件）不参与比较，但旧提交跟踪而工作目录已删除的文件需要输出为删除。`diff [revision1] [revision2]`比较两个提交所跟踪文件名的并集。三种形式都忽略暂存区。
 
 2. 对每个存在差异的文件，按文件名字典序依次输出，格式如下（以修改`f.txt`为例）：
 
